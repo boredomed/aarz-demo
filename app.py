@@ -298,6 +298,9 @@ def makeWebhookResult(data):
                     }, 
                    ],
           }
+               ]
+            }
+         }
 }
      return {
         "speech": text_data,
