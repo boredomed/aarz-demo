@@ -82,9 +82,9 @@ def processMaximum(req):
     result = req.get("result")
     parameters = result.get("parameters")
     act_pri = parameters.get("actual_price")
-    if act_pri == 0
+    if act_pri == 0:
         return act_pri
-    else
+    else:
         maximum = act_pri.get("number")
         return maximum
 
