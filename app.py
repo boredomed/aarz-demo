@@ -83,7 +83,7 @@ def processMaximum(req):
     parameters = result.get("parameters")
     act_pri = parameters.get("actual_price")
 
-    maximum = parameters.get("number")
+    maximum = act_pri.get("number")
     return maximum
 
 def processPriceUnit(req):
