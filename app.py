@@ -114,6 +114,7 @@ def processUnits(req):
     result = req.get("result")
     parameters = result.get("parameters")
     units = parameters.get("Unit")
+    print(units)
     return units
 
 def processProjectName(req):
@@ -124,9 +125,11 @@ def processProjectName(req):
 
 #Price
 def convertMaximum(pric, unit):
-    price = pric
+    print(pric)
+    price = int(pric)
+    print(price)
     if unit[0] == 'z':
-        price = pric
+        price = int(pric)
     elif unit[0] == 'l' or unit[0] == 'L':
         price = price * (10 ** 5)
     elif unit[0] == 'm' or unit[0] == 'M':
