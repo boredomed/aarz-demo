@@ -124,7 +124,7 @@ def processProjectName(req):
 
 #Price
 def convertMaximum(pric, unit):
-    price = int(pric)
+    price = pric
     if unit[0] == 'z':
         price = pric
     elif unit[0] == 'l' or unit[0] == 'L':
