@@ -183,7 +183,7 @@ def makeWebhookResult(data):
           {
              "title":row_title[0],
               "subtitle":row_location[0],
-              "subtitle":"/nPrice: Rs."+str(row_price[0]),
+              "subtitle":"Price: Rs."+str(row_price[0]),
                 "item_url": "https://www.aarz.pk/property-detail/"+row_slug[0],               
                "image_url":"https://www.aarz.pk/"+row_image[0] ,
              "buttons":[
