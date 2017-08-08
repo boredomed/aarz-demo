@@ -36,10 +36,11 @@ def processRequest(req):
     city_names=processlocation(req)
     property_type=processPropertyType(req)
     maximum_valu=processMaximum(req)
+    price_unit=processPriceUnit(req)
     max_area=processAreaMax(req)
     unit_property=processUnits(req)
 
-    maximum_value=convertMaximum(maximum_valu)
+    maximum_value=convertMaximum(maximum_valu, price_unit)
     print(maximum_value)
 
     #baseurl = "https://aarz.pk/bot/index.php?city_name="+city_names+"&sector_name="+sector_names+"&minPrice="+maximum_value+"&type="+property_type+"&LatestProperties="+latest+"&UnitArea="+area_property+"&Unit="+unit_property+"&school="+school+"&airport="+airport+"&transport="+transport+"&security="+security+"&shopping_mall="+malls+"&fuel="+fuel
@@ -76,12 +77,20 @@ def processlocation(req):
 
     return city
 
-
+#Price and Unit
 def processMaximum(req):
     result = req.get("result")
     parameters = result.get("parameters")
-    maximum = parameters.get("PriceRange")
+    act_pri = parameters.get("actual_price")
+
+    maximum = parameters.get("number")
     return maximum
+
+def processPriceUnit(req):
+    result = req.get("result")
+    parameters = result.get("parameters")
+    price_unit = parameters.get("price_unit")
+    return price_unit
 
 def processMinimum(req):
     result = req.get("result")
@@ -114,28 +123,18 @@ def processProjectName(req):
     return project_name 
 
 #Price
-def convertMaximumIfWords(req):
-    price, unitt = req.split()
-    price = int(price)
-    if unitt[0] == 'l' or unitt[0] == 'L':
+def convertMaximum(pric, unit):
+    price = int(pric)
+    if unit[0] == 'z':
+        price = pric
+    elif unit[0] == 'l' or unit[0] == 'L':
         price = price * (10 ** 5)
-    elif unitt[0] == 'm' or unitt[0] == 'M':
+    elif unit[0] == 'm' or unit[0] == 'M':
         price = price * (10 ** 6)
-    elif unitt[0] == 'c' or unitt[0] == 'C':
+    elif unit[0] == 'c' or unit[0] == 'C':
         price = price * (10 ** 7)
     print(price)
     return str(price)
-
-def convertMaximumIfNumber(req):
-    price=int(req)
-    print(price)
-    return str(price)
-
-def convertMaximum(maximum_valu):
-    try:
-        return convertMaximumIfNumber(maximum_valu)
-    except ValueError:
-        return convertMaximumIfWords(maximum_valu)
 
 def makeWebhookResult(data):
      i=0
