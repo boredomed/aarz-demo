@@ -230,8 +230,8 @@ def makeWebhookResult(data):
           }, 
                    {
                 "title": row_title[1],
-                 "subtitle":row_location[0],
-              "subtitle":"Price: Rs."+str(row_price[0]),
+                 "subtitle":row_location[1],
+              "subtitle":"Price: Rs."+str(row_price[1]),
                  "item_url": "https://www.aarz.pk/property-detail/"+row_slug[1],               
                "image_url":"https://www.aarz.pk/"+row_image[1]  ,
                 "buttons": [{
@@ -275,8 +275,8 @@ def makeWebhookResult(data):
           }, 
                    {
                "title": row_title[1],
-               "subtitle":row_location[0],
-              "subtitle":"Price: Rs."+str(row_price[0]),
+               "subtitle":row_location[1],
+              "subtitle":"Price: Rs."+str(row_price[1]),
                 "item_url": "https://www.aarz.pk/property-detail/"+row_slug[1],               
                "image_url":"https://www.aarz.pk/"+row_image[1]  ,
                 "buttons": [{
@@ -292,8 +292,8 @@ def makeWebhookResult(data):
           }, 
                    {
                "title": row_title[2],
-                "subtitle":row_location[0],
-              "subtitle":"Price: Rs."+str(row_price[0]),
+                "subtitle":row_location[2],
+              "subtitle":"Price: Rs."+str(row_price[2]),
                 "item_url": "https://www.aarz.pk/property-detail/"+row_slug[2],               
                "image_url":"https://www.aarz.pk/"+row_image[2]  ,
                 "buttons": [{
