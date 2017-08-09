@@ -177,7 +177,20 @@ def makeWebhookResult(data):
      variable4=str(row_number[3]) 
      #print('speech Data',speech_data)
      #print('Text Data',text_data)
-     if length==1:
+     if "unable" in row_title[0]:
+        message={
+         "text":row_title[0],
+         "quick_replies": [
+           
+                 {
+                "content_type":"text",
+                "title": "Buy Property",
+                "payload": "YOUR_DEFINED_PAYLOAD_FOR_NEXT_IMAGE"
+            }
+        ]
+           
+}
+     elif length==1:
                  message={
                    "attachment":{
                     "type":"template",
