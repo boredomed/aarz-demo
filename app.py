@@ -179,7 +179,7 @@ def makeWebhookResult(data):
      #print('Text Data',text_data)
      if "Unable" in row_title[0]:
         message={
-         "text":"Sorry there is no such property available"           
+         "text":"Sorry there is no such property available."           
 }
      elif length==1:
                  message={
