@@ -393,7 +393,7 @@ def makeWebhookResult(data):
                 "type":"element_share"
                   }
             ]
-          }
+          },
           {
              "title":algos,
               #"subtitle":row_location[0],
