@@ -341,6 +341,8 @@ def makeWebhookResult(data):
 	(algostr,r_slug,im_url)=recommendationalgo()
 	algos = "Recommeded for you: " + algostr
 	text_data = text_data + algos + r_slug + im_url
+	print(r_slug)
+	print(im_url)
 	variable1=str(row_number[0])
 	variable2=str(row_number[1])
 	variable3=str(row_number[2])
@@ -358,7 +360,7 @@ def makeWebhookResult(data):
              "title":algos,
               #"subtitle":row_location[0],
               #"subtitle":"Price: Rs."+str(row_price[0]),
-                "item_url": "https://www.aarz.pk/property-detail/"+r_slug,               
+                "item_url": "https://www.aarz.pk/property-detail/"+r_slug, 
                "image_url":"https://www.aarz.pk/"+im_url ,
              "buttons":[
                  {
