@@ -385,6 +385,11 @@ def makeWebhookResult(data):
                 "item_url": "https://www.aarz.pk/property-detail/"+row_slug[0],               
                "image_url":"https://www.aarz.pk/"+row_image[0]  ,
                 "buttons": [
+			{
+                "type":"phone_number",
+              "title":"Call Agent",
+              "payload":"+92"+variable1[1:]
+},
                     {
                 "type":"element_share"
                     
