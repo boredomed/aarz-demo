@@ -225,10 +225,10 @@ def recommendationalgo():
 	flag_i=0	    
 	for value in url[suggesting_user][str]:
 		if flag_i==0:
-			im_url=value
+			r_slug=value
 			flag_i=flag_i+1
 		else:
-			r_slug=value
+			im_url=value
 			flag_i=0
 	#sts='ashar'
 	return (str,r_slug,im_url)
