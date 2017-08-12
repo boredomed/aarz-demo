@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 import math
 import urllib
@@ -9,7 +10,20 @@ import os
 from flask import Flask
 from flask import request
 from flask import make_response
-
+import psycopg2
+x=os.environ['DATABASE_URL'] = "postgres://solrwgieezdudx:9a9654815c43e749fb35630a403d60b6a30c33691ec4b5f96ad320e4e65dd002@ec2-107-20-250-195.compute-1.amazonaws.com:5432/d9m3jramvhf5pq"
+urllib.parse.uses_netloc.append("postgres")
+db_url = urllib.parse.urlparse(os.environ['DATABASE_URL']) 
+conn = psycopg2.connect(
+    database=db_url.path[1:],
+    user=db_url.username,
+    password=db_url.password,
+    host=db_url.hostname,
+    port=db_url.port
+)
+users_info={};
+#user_info.update({'a':{0,1}})
+cursor=conn.cursor()
 # Flask app should start in global layout
 app = Flask(__name__)
 intent_name="string"
@@ -332,6 +346,38 @@ def makeWebhookResult(data):
 		row_number[i]=data[i]['number']
 		row_image[i]=data[i]['image']
 		row_city[i]=data[i]['city_name']
+		#sql code
+		
+		SQLCommand=("SELECT * FROM Property WHERE Property.prop_id=%d"%  (row_id[i]))
+		Values=[8]
+		cursor.execute(SQLCommand,Values)
+		prop_check=cursor.fetchone() 
+		if prop_check==None:
+			SQLCommand1= ("INSERT INTO property(prop_id,city,title,address,number,slug,price,image) VALUES (%d,'%s','%s','%s','%s','%s',%d,'%s')" %(row_id[i],row_city[i],row_title[i],row_location[i],row_number[i],row_slug[i],row_price[i],row_image[i]))
+			Values1=[8]
+			cursor.execute(SQLCommand1,Values1);
+		conn.commit()
+		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[i],s_id))
+		Values5=[3]
+		cursor.execute(SQLCommand5,Values5)
+		user_check=cursor.fetchone()
+		if prop_check==None:
+			SQLCommand2=("INSERT INTO Users(sess_id,city,prop_id)VALUES ('%s','%s',%d)"%(s_id,row_city[i],row_id[i]))
+			Values2=[3]
+			cursor.execute(SQLCommand2,Values2);
+		conn.commit()
+		SQLCommand3 = ("SELECT u.sess_id,p.title FROM users u join property p on u.prop_id=p.prop_id WHERE p.city='%s' ORDER BY u.sess_id"%(row_city[i])) 
+		Values3=[2]
+		cursor.execute(SQLCommand3,Values3);
+		userdata=cursor.fetchone()
+		while userdata:
+			#if user_info.keys()[len(user_info)-1]==userdata[0]:
+			if userdata[0] in users_info:
+				users_info[userdata[0]].update({userdata[1]})
+			else:
+				users_info.update({userdata[0]: {userdata[1]}})
+			userdata=cursor.fetchone()
+		print(users_info)
 		speech_data_parts="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i]) + "."
 		speech_data = speech_data + speech_data_parts
 		text_data_parts ="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i])+ ". For Info about this contact at number "+str(row_number[i]) + "."
@@ -340,9 +386,12 @@ def makeWebhookResult(data):
 	print(row_title[0])
 	(algostr,r_slug,im_url)=recommendationalgo()
 	algos = "Recommeded for you: " + algostr
+	#recommended property
+	SQLCommand4=("SELECT * FROM Property WHERE title='%s'"%(algostr))
+	Values4=[8]
+	cursor.execute(SQLCommand4,Values4);
+	recom_prop=cursor.fetchone()
 	text_data = text_data + algos + r_slug + im_url
-	print(r_slug)
-	print(im_url)
 	variable1=str(row_number[0])
 	variable2=str(row_number[1])
 	variable3=str(row_number[2])
@@ -360,7 +409,7 @@ def makeWebhookResult(data):
              "title":algos,
               #"subtitle":row_location[0],
               #"subtitle":"Price: Rs."+str(row_price[0]),
-                "item_url": "https://www.aarz.pk/property-detail/"+r_slug, 
+                "item_url": "https://www.aarz.pk/property-detail/"+r_slug,               
                "image_url":"https://www.aarz.pk/"+im_url ,
              "buttons":[
                  {
@@ -385,11 +434,6 @@ def makeWebhookResult(data):
                 "item_url": "https://www.aarz.pk/property-detail/"+row_slug[0],               
                "image_url":"https://www.aarz.pk/"+row_image[0]  ,
                 "buttons": [
-			{
-                "type":"phone_number",
-              "title":"Call Agent",
-              "payload":"+92"+variable1[1:]
-},
                     {
                 "type":"element_share"
                     
@@ -484,3 +528,4 @@ if __name__ == '__main__':
     print("Starting app on port %d" % port)
 
 app.run(debug=True, port=port, host='0.0.0.0')
+conn.close()
