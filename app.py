@@ -412,6 +412,8 @@ def makeWebhookResult(data):
 		text_data_parts ="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i])+ ". For Info about this contact at number "+str(row_number[i]) + "."
 		text_data = text_data + text_data_parts	
 		i+=1
+	print("CITY IS")	
+	print(row_city[0])
 	SQLCommand3 = ("SELECT u.sess_id,p.title FROM users u join property p on u.prop_id=p.prop_id WHERE p.city='%s' ORDER BY u.sess_id"%(row_city[0])) #select the all properties of this city searched by users
 	Values3=[2]
 	cursor.execute(SQLCommand3,Values3);
