@@ -372,7 +372,7 @@ def makeWebhookResult(data):
 	length=len(data)
 	speech_data = "Here are some properties with your choice. We have total of "+str(length)+" records of your interest in city  "+city+"."
 	text_data = "Here are some properties with your choice. We have total of "+str(length)+" records of your interest in city  "+city+"."
-	row_id=['test','test1','test2','test3','test4','test5','test6','test7','test8','test9','test10']
+	row_id=[1,2,3,4,5]
 	row_title=['test','test1','test2','test3','test4','test5','test6','test7','test8','test9','test10']
 	row_location=['test','test1','test2','test3','test4','test5','test6','test7','test8','test9','test10']
 	row_price=['test','test1','test2','test3','test4','test5','test6','test7','test8','test9','test10']
