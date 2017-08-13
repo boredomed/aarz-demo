@@ -263,8 +263,11 @@ def recommendationalgo():
 
 
 	if (bool(suggestiondic[s_id])):
-		for house in suggestiondic.values():	
-			sstr=house[0]
+		for key in suggestiondic:
+			for house in suggestiondic[key]:
+				strhouse=house.lower()
+				if (strhouse.find(city_names.lower())!= -1):
+    					sstr=strhouse
 
 
 	#users who have no similar users
@@ -277,7 +280,7 @@ def recommendationalgo():
 					if house in  buy1[user2]:
 						housecount=housecount+1		
 				if(housecount>hcountf):
-					if (house not in buy1[s_id]):
+					if (house not in buy1[s_id] and (house.lower().find(city_names.lower())!=1):
 						hcountf=housecount
 						hfh=house
 						#print ("andr agya house me kljkjdsljf:", hfh)
