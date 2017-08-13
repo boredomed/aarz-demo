@@ -361,7 +361,7 @@ def makeWebhookResult(data):
 		Values5=[3]
 		cursor.execute(SQLCommand5,Values5)
 		user_check=cursor.fetchone()
-		if prop_check==None:
+		if user_check==None:
 			SQLCommand2=("INSERT INTO Users(sess_id,city,prop_id)VALUES ('%s','%s',%d)"%(s_id,row_city[i],row_id[i]))
 			Values2=[3]
 			cursor.execute(SQLCommand2,Values2);
@@ -377,7 +377,9 @@ def makeWebhookResult(data):
 			else:
 				users_info.update({userdata[0]: {userdata[1]}})
 			userdata=cursor.fetchone()
+		print("USER INFO DICTIONARY")
 		print(users_info)
+		print("USER INFO END")
 		speech_data_parts="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i]) + "."
 		speech_data = speech_data + speech_data_parts
 		text_data_parts ="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i])+ ". For Info about this contact at number "+str(row_number[i]) + "."
