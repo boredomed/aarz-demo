@@ -346,42 +346,42 @@ def makeWebhookResult(data):
 		row_image[i]=data[i]['image']
 		row_city[i]=data[i]['city_name']
 		#sql code
-		if "Unable" in row_title[0]:
-			break
-		SQLCommand=("SELECT * FROM Property WHERE Property.prop_id=%d"%  (row_id[i]))
+		if "Unable" in row_title[0]: #if there is no data
+			break  #don't run sql commands
+		SQLCommand=("SELECT * FROM Property WHERE Property.prop_id=%d"%  (row_id[i])) #check if this property is already present in database
 		Values=[8]
 		cursor.execute(SQLCommand,Values)
 		prop_check=cursor.fetchone() 
-		if prop_check==None:
+		if prop_check==None:#if 0 rows are returned insert that property in Property table
 			SQLCommand1= ("INSERT INTO property(prop_id,city,title,address,number,slug,price,image) VALUES (%d,'%s','%s','%s','%s','%s',%d,'%s')" %(row_id[i],row_city[i],row_title[i],row_location[i],row_number[i],row_slug[i],row_price[i],row_image[i]))
 			Values1=[8]
 			cursor.execute(SQLCommand1,Values1);
 		conn.commit()
-		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[i],s_id))
+		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[i],s_id)) #check if this user has already searched for this property
 		Values5=[3]
 		cursor.execute(SQLCommand5,Values5)
 		user_check=cursor.fetchone()
-		if user_check==None:
+		if user_check==None: #if this is the first time he searches for this property, add this info in Users table
 			SQLCommand2=("INSERT INTO Users(sess_id,city,prop_id)VALUES ('%s','%s',%d)"%(s_id,row_city[i],row_id[i]))
 			Values2=[3]
 			cursor.execute(SQLCommand2,Values2);
 		conn.commit()
-		SQLCommand3 = ("SELECT u.sess_id,p.title FROM users u join property p on u.prop_id=p.prop_id WHERE p.city='%s' ORDER BY u.sess_id"%(row_city[i])) 
-		Values3=[2]
-		cursor.execute(SQLCommand3,Values3);
-		userdata=cursor.fetchone()
-		while userdata:
-			#if user_info.keys()[len(user_info)-1]==userdata[0]:
-			if userdata[0] in users_info:
-				users_info[userdata[0]].update({userdata[1]})
-			else:
-				users_info.update({userdata[0]: {userdata[1]}})
-			userdata=cursor.fetchone()
 		speech_data_parts="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i]) + "."
 		speech_data = speech_data + speech_data_parts
 		text_data_parts ="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i])+ ". For Info about this contact at number "+str(row_number[i]) + "."
 		text_data = text_data + text_data_parts	
 		i+=1
+	SQLCommand3 = ("SELECT u.sess_id,p.title FROM users u join property p on u.prop_id=p.prop_id WHERE p.city='%s' ORDER BY u.sess_id"%(row_city[i])) #select the all properties of this city searched by users
+	Values3=[2]
+	cursor.execute(SQLCommand3,Values3);
+	userdata=cursor.fetchone()
+	#if userdata==None:
+	while userdata:#to cater all the rows from the result
+		if userdata[0] in users_info: #if that user is already in the dictionary, append to the houses list
+			users_info[userdata[0]].update({userdata[1]})
+		else: #if this user is not in the dictionary, add the data
+			users_info.update({userdata[0]: {userdata[1]}})
+		userdata=cursor.fetchone()
 	print("USER INFO DICTIONARY")
 	print(users_info)
 	print("USER INFO END")
