@@ -436,7 +436,7 @@ def makeWebhookResult(data):
 		Values4=[8]
 		cursor.execute(SQLCommand4,Values4);
 		recom_prop=cursor.fetchone()
-		recom_prop[2] = "Recommeded for you: " + recom_prop[2]
+		recom_prop[2] = "Recommeded for you: " + algostr
 		print("recom_prop")
 		print(recom_prop)
 		text_data = text_data + algos
