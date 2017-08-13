@@ -21,7 +21,7 @@ conn = psycopg2.connect(
     host=db_url.hostname,
     port=db_url.port
 )
-users_info={};
+users_info={}
 #user_info.update({'a':{0,1}})
 cursor=conn.cursor()
 # Flask app should start in global layout
