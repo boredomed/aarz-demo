@@ -121,6 +121,7 @@ def recommendationalgo():
 	simusr=[]
 	s_list=[]
 
+	sstr='no recommendation yet'
 	hfh='no recommendation yet'
 	housecount=0
 	hcountf=0
