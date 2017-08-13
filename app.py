@@ -377,14 +377,14 @@ def makeWebhookResult(data):
 			else:
 				users_info.update({userdata[0]: {userdata[1]}})
 			userdata=cursor.fetchone()
-		print("USER INFO DICTIONARY")
-		print(users_info)
-		print("USER INFO END")
 		speech_data_parts="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i]) + "."
 		speech_data = speech_data + speech_data_parts
 		text_data_parts ="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i])+ ". For Info about this contact at number "+str(row_number[i]) + "."
 		text_data = text_data + text_data_parts	
 		i+=1
+	print("USER INFO DICTIONARY")
+	print(users_info)
+	print("USER INFO END")
 	print(row_title[0])
 	(algostr,r_slug,im_url)=recommendationalgo()
 	algos = "Recommeded for you: " + algostr
