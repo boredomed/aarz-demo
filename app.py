@@ -436,7 +436,6 @@ def makeWebhookResult(data):
 		Values4=[8]
 		cursor.execute(SQLCommand4,Values4);
 		recom_prop=cursor.fetchone()
-		recom_prop[2] = "Recommeded for you: " + algostr
 		print("recom_prop")
 		print(recom_prop)
 		text_data = text_data + algos
@@ -473,7 +472,7 @@ def makeWebhookResult(data):
 	"template_type":"generic",
 	"elements":[
           {
-             "title":recom_prop[2],
+             "title":"Recommended for you:"+recom_prop[2],
               "subtitle":recom_prop[3],
               "subtitle":"Price: Rs."+str(recom_prop[6]),
                 "item_url": "https://www.aarz.pk/property-detail/"+recom_prop[5],               
@@ -517,7 +516,7 @@ def makeWebhookResult(data):
                    ]
           }, 
                 {
-             "title":recom_prop[2],
+             "title":"Recommended for you:"+recom_prop[2],
               "subtitle":recom_prop[3],
               "subtitle":"Price: Rs."+str(recom_prop[6]),
                 "item_url": "https://www.aarz.pk/property-detail/"+recom_prop[5],               
@@ -578,7 +577,7 @@ def makeWebhookResult(data):
                    ],
           }, 
                   {
-             "title":recom_prop[2],
+             "title":"Recommended for you:"+recom_prop[2],
               "subtitle":recom_prop[3],
               "subtitle":"Price: Rs."+str(recom_prop[6]),
                 "item_url": "https://www.aarz.pk/property-detail/"+recom_prop[5],               
