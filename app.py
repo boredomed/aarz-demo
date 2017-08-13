@@ -357,15 +357,6 @@ def makeWebhookResult(data):
 			Values1=[8]
 			cursor.execute(SQLCommand1,Values1);
 		conn.commit()
-		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[i],s_id)) #check if this user has already searched for this property
-		Values5=[3]
-		cursor.execute(SQLCommand5,Values5)
-		user_check=cursor.fetchone()
-		if user_check==None: #if this is the first time he searches for this property, add this info in Users table
-			SQLCommand2=("INSERT INTO Users(sess_id,city,prop_id)VALUES ('%s','%s',%d)"%(s_id,row_city[i],row_id[i]))
-			Values2=[3]
-			cursor.execute(SQLCommand2,Values2);
-		conn.commit()
 		speech_data_parts="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i]) + "."
 		speech_data = speech_data + speech_data_parts
 		text_data_parts ="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i])+ ". For Info about this contact at number "+str(row_number[i]) + "."
@@ -396,6 +387,16 @@ def makeWebhookResult(data):
 	cursor.execute(SQLCommand4,Values4);
 	recom_prop=cursor.fetchone()
 	text_data = text_data + algos + r_slug + im_url
+	while (i<length):
+		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[i],s_id)) #check if this user has already searched for this property
+		Values5=[3]
+		cursor.execute(SQLCommand5,Values5)
+		user_check=cursor.fetchone()
+		if user_check==None: #if this is the first time he searches for this property, add this info in Users table
+			SQLCommand2=("INSERT INTO Users(sess_id,city,prop_id)VALUES ('%s','%s',%d)"%(s_id,row_city[i],row_id[i]))
+			Values2=[3]
+			cursor.execute(SQLCommand2,Values2);
+		conn.commit()
 	variable1=str(row_number[0])
 	variable2=str(row_number[1])
 	variable3=str(row_number[2])
