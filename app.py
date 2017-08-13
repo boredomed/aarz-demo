@@ -460,7 +460,11 @@ def makeWebhookResult(data):
 	variable4=str(row_number[3]) 
 	#print('speech Data',speech_data)
 	#print('Text Data',text_data)
-	if "Unable" in row_title[0]:
+	if "No" in recom_prop[2]:
+		message={
+         "text":"I'm sorry but there is no such property available.",   
+}
+	elif "Unable" in row_title[0]:
 		message={
 	  "attachment":{
 	   "type":"template",
