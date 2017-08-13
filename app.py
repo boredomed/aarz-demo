@@ -413,7 +413,7 @@ def makeWebhookResult(data):
 	Values3=[2]
 	cursor.execute(SQLCommand3,Values3);
 	userdata=cursor.fetchone()
-	if userdata==None:
+	#if userdata==None:
 	print("USERDATA[0]:")
 	print(userdata[0])
 	while userdata:#to cater all the rows from the result
