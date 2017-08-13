@@ -395,6 +395,8 @@ def makeWebhookResult(data):
 		if "Unable" in row_title[0]: #if there is no data
 			break  #don't run sql commands
 		SQLCommand=("SELECT * FROM Property WHERE Property.prop_id=%d"%  (row_id[i])) #check if this property is already present in database
+		print("PROPERTY ID1")
+		print(row_id[i])
 		Values=[8]
 		cursor.execute(SQLCommand,Values)
 		prop_check=cursor.fetchone() 
@@ -435,6 +437,7 @@ def makeWebhookResult(data):
 	recom_prop=cursor.fetchone()
 	text_data = text_data + algos
 	j=0;
+	print(length);
 	while (j<length):
 		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[i],s_id)) #check if this user has already searched for this property
 		print("PROPERTY ID")
