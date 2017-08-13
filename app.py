@@ -414,7 +414,7 @@ def makeWebhookResult(data):
 		i+=1
 	print("CITY IS")	
 	print(row_city[0])
-	SQLCommand3 = ("SELECT u.sess_id,p.title FROM users u join property p on u.prop_id=p.prop_id WHERE p.city='%s' ORDER BY u.sess_id"%(row_city[0])) #select the all properties of this city searched by users
+	SQLCommand3 = ("SELECT u.sess_id,p.title FROM users u join property p on u.prop_id=p.prop_id WHERE p.city='%s' ORDER BY u.sess_id"%(city_names)) #select the all properties of this city searched by users
 	Values3=[2]
 	cursor.execute(SQLCommand3,Values3);
 	userdata=cursor.fetchone()
