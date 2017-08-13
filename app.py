@@ -399,6 +399,7 @@ def makeWebhookResult(data):
 		cursor.execute(SQLCommand,Values)
 		prop_check=cursor.fetchone() 
 		if prop_check==None:#if 0 rows are returned insert that property in Property table
+			print("ADDING NEW PROPERTY")
 			SQLCommand1= ("INSERT INTO property(prop_id,city,title,address,number,slug,price,image) VALUES (%d,'%s','%s','%s','%s','%s',%d,'%s')" %(row_id[i],row_city[i],row_title[i],row_location[i],row_number[i],row_slug[i],row_price[i],row_image[i]))
 			Values1=[8]
 			cursor.execute(SQLCommand1,Values1);
@@ -412,7 +413,7 @@ def makeWebhookResult(data):
 	Values3=[2]
 	cursor.execute(SQLCommand3,Values3);
 	userdata=cursor.fetchone()
-	#if userdata==None:
+	if userdata==None:
 	print("USERDATA[0]:")
 	print(userdata[0])
 	while userdata:#to cater all the rows from the result
@@ -439,6 +440,7 @@ def makeWebhookResult(data):
 		cursor.execute(SQLCommand5,Values5)
 		user_check=cursor.fetchone()
 		if user_check==None: #if this is the first time he searches for this property, add this info in Users table
+			print("ADDING NEW USER")
 			SQLCommand2=("INSERT INTO Users(sess_id,city,prop_id)VALUES ('%s','%s',%d)"%(s_id,row_city[i],row_id[i]))
 			Values2=[3]
 			cursor.execute(SQLCommand2,Values2);
