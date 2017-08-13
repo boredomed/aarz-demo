@@ -458,11 +458,15 @@ def makeWebhookResult(data):
 	"elements":[
           {
              "title":algos,
-              #"subtitle":row_location[0],
-              #"subtitle":"Price: Rs."+str(row_price[0]),
-                "item_url": "https://www.aarz.pk/property-detail/"+r_slug,               
-               "image_url":"https://www.aarz.pk/"+im_url ,
-             "buttons":[
+              "subtitle":recom_prop[3],
+              "subtitle":"Price: Rs."+str(recom_prop[6]),
+                "item_url": "https://www.aarz.pk/property-detail/"+recom_prop[5],               
+               "image_url":"https://www.aarz.pk/"+recom_prop[7] ,
+             "buttons":[{
+                "type":"phone_number",
+              "title":"Call Agent",
+              "payload":"+92"+recom_prop[4][1:]
+                },
                  {
                 "type":"element_share"
                   }
@@ -485,24 +489,32 @@ def makeWebhookResult(data):
                 "item_url": "https://www.aarz.pk/property-detail/"+row_slug[0],               
                "image_url":"https://www.aarz.pk/"+row_image[0]  ,
                 "buttons": [
+			{
+                "type":"phone_number",
+              "title":"Call Agent",
+              "payload":"+92"+variable2[1:]
+            },
                     {
                 "type":"element_share"
                     
                     }
                    ]
           }, 
-                   {
-                "title": algos,
-               #  "subtitle":row_location[1],
-              #"subtitle":"Price: Rs."+str(row_price[1]),
-                 "item_url": "https://www.aarz.pk/property-detail/"+r_slug,               
-               "image_url":"https://www.aarz.pk/"+im_url  ,
-                "buttons": [
-                     {
+                {
+             "title":algos,
+              "subtitle":recom_prop[3],
+              "subtitle":"Price: Rs."+str(recom_prop[6]),
+                "item_url": "https://www.aarz.pk/property-detail/"+recom_prop[5],               
+               "image_url":"https://www.aarz.pk/"+recom_prop[7] ,
+             "buttons":[{
+                "type":"phone_number",
+              "title":"Call Agent",
+              "payload":"+92"+recom_prop[4][1:]
+                },
+                 {
                 "type":"element_share"
-                    
-                    }
-                   ]
+                  }
+            ]
           }]
             
         }
@@ -549,18 +561,21 @@ def makeWebhookResult(data):
                     }, 
                    ],
           }, 
-                   {
-               "title": algos,
-              #  "subtitle":row_location[2],
-             # "subtitle":"Price: Rs."+str(row_price[2]),
-                "item_url": "https://www.aarz.pk/property-detail/"+r_slug,               
-               "image_url":"https://www.aarz.pk/"+im_url,
-                "buttons": [
-                     {
+                  {
+             "title":algos,
+              "subtitle":recom_prop[3],
+              "subtitle":"Price: Rs."+str(recom_prop[6]),
+                "item_url": "https://www.aarz.pk/property-detail/"+recom_prop[5],               
+               "image_url":"https://www.aarz.pk/"+recom_prop[7] ,
+             "buttons":[{
+                "type":"phone_number",
+              "title":"Call Agent",
+              "payload":"+92"+recom_prop[4][1:]
+                },
+                 {
                 "type":"element_share"
-                    
-                    }
-                   ]
+                  }
+            ]
           }
                ]
             }
