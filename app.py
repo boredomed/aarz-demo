@@ -441,13 +441,13 @@ def makeWebhookResult(data):
 		text_data = text_data + algos
 	j=0;
 	while (j<length):
-		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[j],s_id)) #check if this user has already searched for this property
+		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(int(row_id[j]),s_id)) #check if this user has already searched for this property
 		Values5=[3]
 		cursor.execute(SQLCommand5,Values5)
 		user_check=cursor.fetchone()
 		if user_check==None: #if this is the first time he searches for this property, add this info in Users table
 			print("ADDING NEW USER")
-			SQLCommand2=("INSERT INTO Users(sess_id,city,prop_id)VALUES ('%s','%s',%d)"%(s_id,row_city[j],row_id[j]))
+			SQLCommand2=("INSERT INTO Users(sess_id,city,prop_id)VALUES ('%s','%s',%d)"%(s_id,row_city[j],int(row_id[j])))
 			Values2=[3]
 			cursor.execute(SQLCommand2,Values2);
 		conn.commit()
