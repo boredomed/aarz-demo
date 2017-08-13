@@ -436,6 +436,10 @@ def makeWebhookResult(data):
 	text_data = text_data + algos
 	while (i<length):
 		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[i],s_id)) #check if this user has already searched for this property
+		print("PROPERTY ID")
+		print(row_id[i])
+		print("SESSION ID")
+		print(s_id)
 		Values5=[3]
 		cursor.execute(SQLCommand5,Values5)
 		user_check=cursor.fetchone()
