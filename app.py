@@ -419,8 +419,9 @@ def makeWebhookResult(data):
 	cursor.execute(SQLCommand3,Values3);
 	userdata=cursor.fetchone()
 	if userdata!=None:
-		print("USERDATA[0]:")
-		print(userdata[0])
+		print("USER DATA DICTIONARY")
+		print(userdata)
+		print("USER DATA END")
 		while userdata:#to cater all the rows from the result
 			if userdata[0] in users_info: #if that user is already in the dictionary, append to the houses list
 				users_info[userdata[0]].update({userdata[1]})
