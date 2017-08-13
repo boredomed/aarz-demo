@@ -467,9 +467,13 @@ def makeWebhookResult(data):
 	variable4=str(row_number[3]) 
 	#print('speech Data',speech_data)
 	#print('Text Data',text_data)
+	rc=0
 	for s in recom_prop:
-		if 'No' in s:
-			message={
+		if rc==2:
+			rst=s
+		rc=rc+1
+	if 'No' in rst:
+		message={
          "text":"I'm sorry but there is no such property available.",   
 }
 	elif "Unable" in row_title[0]:
