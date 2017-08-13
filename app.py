@@ -434,7 +434,8 @@ def makeWebhookResult(data):
 	cursor.execute(SQLCommand4,Values4);
 	recom_prop=cursor.fetchone()
 	text_data = text_data + algos
-	while (i<length):
+	j=0;
+	while (j<length):
 		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[i],s_id)) #check if this user has already searched for this property
 		print("PROPERTY ID")
 		print(row_id[i])
@@ -449,6 +450,7 @@ def makeWebhookResult(data):
 			Values2=[3]
 			cursor.execute(SQLCommand2,Values2);
 		conn.commit()
+		j+=1
 	variable1=str(row_number[0])
 	variable2=str(row_number[1])
 	variable3=str(row_number[2])
