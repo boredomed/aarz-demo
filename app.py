@@ -372,6 +372,7 @@ def makeWebhookResult(data):
 	length=len(data)
 	speech_data = "Here are some properties with your choice. We have total of "+str(length)+" records of your interest in city  "+city+"."
 	text_data = "Here are some properties with your choice. We have total of "+str(length)+" records of your interest in city  "+city+"."
+	recom_prop=['','',"No Recommendation Available",'','','','','']
 	row_id=[1,2,3,4,5]
 	row_title=['test','test1','test2','test3','test4','test5','test6','test7','test8','test9','test10']
 	row_location=['test','test1','test2','test3','test4','test5','test6','test7','test8','test9','test10']
@@ -415,45 +416,45 @@ def makeWebhookResult(data):
 	Values3=[2]
 	cursor.execute(SQLCommand3,Values3);
 	userdata=cursor.fetchone()
-	#if userdata==None:
-	print("USERDATA[0]:")
-	print(userdata[0])
-	while userdata:#to cater all the rows from the result
-		if userdata[0] in users_info: #if that user is already in the dictionary, append to the houses list
-			users_info[userdata[0]].update({userdata[1]})
-		else: #if this user is not in the dictionary, add the data
-			users_info.update({userdata[0]: {userdata[1]}})
-		userdata=cursor.fetchone()
-	print("USER INFO DICTIONARY")
-	print(users_info)
-	print("USER INFO END")
-	print(row_title[0])
-	algostr=recommendationalgo()
-	algos = "Recommeded for you: " + algostr
-	#recommended property
-	SQLCommand4=("SELECT * FROM Property WHERE title='%s'"%(algostr))
-	Values4=[8]
-	cursor.execute(SQLCommand4,Values4);
-	recom_prop=cursor.fetchone()
-	text_data = text_data + algos
-	j=0;
-	print(length);
-	while (j<length):
-		SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[j],s_id)) #check if this user has already searched for this property
-		print("PROPERTY ID")
-		print(row_id[j])
-		print("SESSION ID")
-		print(s_id)
-		Values5=[3]
-		cursor.execute(SQLCommand5,Values5)
-		user_check=cursor.fetchone()
-		if user_check==None: #if this is the first time he searches for this property, add this info in Users table
-			print("ADDING NEW USER")
-			SQLCommand2=("INSERT INTO Users(sess_id,city,prop_id)VALUES ('%s','%s',%d)"%(s_id,row_city[j],row_id[j]))
-			Values2=[3]
-			cursor.execute(SQLCommand2,Values2);
-		conn.commit()
-		j+=1
+	if userdata!=None:
+		print("USERDATA[0]:")
+		print(userdata[0])
+		while userdata:#to cater all the rows from the result
+			if userdata[0] in users_info: #if that user is already in the dictionary, append to the houses list
+				users_info[userdata[0]].update({userdata[1]})
+			else: #if this user is not in the dictionary, add the data
+				users_info.update({userdata[0]: {userdata[1]}})
+			userdata=cursor.fetchone()
+		print("USER INFO DICTIONARY")
+		print(users_info)
+		print("USER INFO END")
+		print(row_title[0])
+		algostr=recommendationalgo()
+		algos = "Recommeded for you: " + algostr
+		#recommended property
+		SQLCommand4=("SELECT * FROM Property WHERE title='%s'"%(algostr))
+		Values4=[8]
+		cursor.execute(SQLCommand4,Values4);
+		recom_prop=cursor.fetchone()
+		text_data = text_data + algos
+		j=0;
+		print(length);
+		while (j<length):
+			SQLCommand5=("SELECT * FROM Users WHERE Users.prop_id=%d and Users.sess_id='%s'"%(row_id[j],s_id)) #check if this user has already searched for this property
+			print("PROPERTY ID")
+			print(row_id[j])
+			print("SESSION ID")
+			print(s_id)
+			Values5=[3]
+			cursor.execute(SQLCommand5,Values5)
+			user_check=cursor.fetchone()
+			if user_check==None: #if this is the first time he searches for this property, add this info in Users table
+				print("ADDING NEW USER")
+				SQLCommand2=("INSERT INTO Users(sess_id,city,prop_id)VALUES ('%s','%s',%d)"%(s_id,row_city[j],row_id[j]))
+				Values2=[3]
+				cursor.execute(SQLCommand2,Values2);
+			conn.commit()
+			j+=1
 	variable1=str(row_number[0])
 	variable2=str(row_number[1])
 	variable3=str(row_number[2])
@@ -468,7 +469,7 @@ def makeWebhookResult(data):
 	"template_type":"generic",
 	"elements":[
           {
-             "title":algos,
+             "title":recom_prop[2],
               "subtitle":recom_prop[3],
               "subtitle":"Price: Rs."+str(recom_prop[6]),
                 "item_url": "https://www.aarz.pk/property-detail/"+recom_prop[5],               
@@ -512,7 +513,7 @@ def makeWebhookResult(data):
                    ]
           }, 
                 {
-             "title":algos,
+             "title":recom_prop[2],
               "subtitle":recom_prop[3],
               "subtitle":"Price: Rs."+str(recom_prop[6]),
                 "item_url": "https://www.aarz.pk/property-detail/"+recom_prop[5],               
@@ -573,7 +574,7 @@ def makeWebhookResult(data):
                    ],
           }, 
                   {
-             "title":algos,
+             "title":recom_prop[2],
               "subtitle":recom_prop[3],
               "subtitle":"Price: Rs."+str(recom_prop[6]),
                 "item_url": "https://www.aarz.pk/property-detail/"+recom_prop[5],               
