@@ -283,7 +283,7 @@ def recommendationalgo():
 					if house in  buy1[user2]:
 						housecount=housecount+1		
 				if(housecount>hcountf):
-					if (house not in buy1[s_id]):
+					if (house not in buy1[s_id] and city_names.lower() in house.lower()):
 						hcountf=housecount
 						hfh=house
 						#print ("andr agya house me kljkjdsljf:", hfh)
