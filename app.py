@@ -269,7 +269,8 @@ def recommendationalgo():
 			if city_names.lower() in hous.lower():
 				shouslist.append(hous)
 		print (shouslist)
-		sstr=shouslist[0]
+		if len(shouslist) !=0:
+			sstr=shouslist[0]
 
 
 	#users who have no similar users
