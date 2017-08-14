@@ -469,10 +469,112 @@ def makeWebhookResult(data):
 	variable4=str(row_number[3]) 
 	#print('speech Data',speech_data)
 	#print('Text Data',text_data)
-	if "No" in recom_prop[2]:
-		message={
-         "text":"I'm sorry but there is no such property available.",   
-}
+	if len(recom_prop)==0:
+		if length==1:
+			message= {
+         "attachment": {
+           "type": "template",
+            "payload": {
+               "template_type": "generic",
+               "elements": [{
+               "title": row_title[0],
+                "subtitle":row_location[0],
+              "subtitle":"Price: Rs."+str(row_price[0]),
+                "item_url": "https://www.aarz.pk/property-detail/"+row_slug[0],               
+               "image_url":"https://www.aarz.pk/"+row_image[0]  ,
+                "buttons": [
+			{
+                "type":"phone_number",
+              "title":"Call Agent",
+              "payload":"+92"+variable2[1:]
+            },
+                    {
+                "type":"element_share"
+                    
+                    }
+                   ]
+          }, 
+                {
+             "title":"Recommended for you:"+"No recommendation available",
+              "subtitle":"",
+              "subtitle":"",
+                "item_url":"",               
+               "image_url":"" ,
+             "buttons":[{
+                "type":"phone_number",
+              "title":"Call Agent",
+              "payload":""
+                },
+                 {
+                "type":"element_share"
+                  }
+            ]
+          }]
+            
+        }
+      }
+    }
+		else:
+			message= {
+         "attachment": {
+           "type": "template",
+            "payload": {
+               "template_type": "generic",
+               "elements": [
+                   {
+               "title": row_title[0],
+                "subtitle":row_location[0],
+              "subtitle":"Price: Rs."+str(row_price[0]),
+                "item_url": "https://www.aarz.pk/property-detail/"+row_slug[0],               
+               "image_url":"https://www.aarz.pk/"+row_image[0]  ,
+                "buttons": [{
+                "type":"phone_number",
+              "title":"Call Agent",
+              "payload":"+92"+variable1[1:]
+                },
+                    {
+                "type":"element_share"
+                  
+            }, 
+                   ],
+          }, 
+                   {
+               "title": row_title[1],
+               "subtitle":row_location[1],
+              "subtitle":"Price: Rs."+str(row_price[1]),
+                "item_url": "https://www.aarz.pk/property-detail/"+row_slug[1],               
+               "image_url":"https://www.aarz.pk/"+row_image[1]  ,
+                "buttons": [{
+                "type":"phone_number",
+              "title":"Call Agent",
+              "payload":"+92"+variable2[1:]
+            }, 
+                     {
+                "type":"element_share"
+                    
+                    }, 
+                   ],
+          }, 
+                  {
+             "title":"Recommended for you:"+"No recommendation available",
+              "subtitle":"",
+              "subtitle":"",
+                "item_url":"",               
+               "image_url":"",
+             "buttons":[{
+                "type":"phone_number",
+              "title":"Call Agent",
+              "payload":""
+                },
+                 {
+                "type":"element_share"
+                  }
+            ]
+          }
+               ]
+            }
+         }
+			}	
 	elif "Unable" in row_title[0]:
 		message={
 	  "attachment":{
