@@ -121,6 +121,7 @@ def recommendationalgo():
 	simusr=[]
 	s_list=[]
 
+	sstr='no recommendation yet'
 	hfh='no recommendation yet'
 	housecount=0
 	hcountf=0
@@ -291,8 +292,7 @@ def recommendationalgo():
 
 		suggestiondic[s_id]=hfh
 		sstr=hfh
-	print (suggestiondic)
-
+	#print (suggestiondic)
 	print ("suggested house:",sstr)
 	
 	return (sstr)
