@@ -134,6 +134,7 @@ def recommendationalgo():
 	comingdata={}
 	buy1={}
 	
+	print ("this is user info:", users_info)
 	#d={'0db85c4d-2f65-403d-a67e-e8af469ee685': {'1 Kanal Plot For Sale In DHA Phase-8', '1 Kanal West Open Corner Brand New Bungalow Is Available For Sale', '26.64 Marla House For Rent ', '900 Square Feet Apartment for Sale in Karachi Rahat Commercial Area'}, 'ab8f9722-1925-49cd-ab28-05aad09ddc3e': {'5 Marla Residential Land for Sale in Karachi Bahria Town', '4.4 Marla Residential Land for Sale in Karachi Bahria Town'}, '40efe1a9-f019-4328-b86e-cf14c4eac4ef': {'1 Kanal Bungalow Available For Sale in AFOHS New Malir', '1 Kanal Plot For Sale In DHA Phase-8', '26.64 Marla House For Rent ', '1 Kanal West Open Corner Brand New Bungalow Is Available For Sale'}}
 	rating=10
 	ndlist={}
