@@ -424,6 +424,7 @@ def makeWebhookResult(data):
 	Values3=[2]
 	cursor.execute(SQLCommand3,Values3);
 	userdata=cursor.fetchone()
+	users_info={}
 	if userdata!=None:
 		print("USER DATA DICTIONARY")
 		print(userdata)
