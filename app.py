@@ -86,7 +86,7 @@ def processsession(req):
 	session_id = req.get("sessionId")
 	#print(session_Id)
 	return session_id
-def recommendationalgo():
+def recommendationalgo(**user_info):
 	rating=10
 
 	buy1={}
@@ -134,12 +134,12 @@ def recommendationalgo():
 	comingdata={}
 	buy1={}
 	
-	print ("this is user info:", users_info)
+	print ("this is user info:", user_info)
 	#d={'0db85c4d-2f65-403d-a67e-e8af469ee685': {'1 Kanal Plot For Sale In DHA Phase-8', '1 Kanal West Open Corner Brand New Bungalow Is Available For Sale', '26.64 Marla House For Rent ', '900 Square Feet Apartment for Sale in Karachi Rahat Commercial Area'}, 'ab8f9722-1925-49cd-ab28-05aad09ddc3e': {'5 Marla Residential Land for Sale in Karachi Bahria Town', '4.4 Marla Residential Land for Sale in Karachi Bahria Town'}, '40efe1a9-f019-4328-b86e-cf14c4eac4ef': {'1 Kanal Bungalow Available For Sale in AFOHS New Malir', '1 Kanal Plot For Sale In DHA Phase-8', '26.64 Marla House For Rent ', '1 Kanal West Open Corner Brand New Bungalow Is Available For Sale'}}
 	rating=10
 	ndlist={}
-	for key in users_info:
-		for house in users_info[key]:
+	for key in user_info:
+		for house in user_info[key]:
 			ndlist.update({house:rating})
 			rating=rating-2
 		rating=10
@@ -440,7 +440,7 @@ def makeWebhookResult(data):
 		print(users_info)
 		print("USER INFO END")
 		print(row_title[0])
-		algostr=recommendationalgo()
+		algostr=recommendationalgo(**users_info)
 		algos = "Recommeded for you: " + algostr
 		#recommended property
 		print(algos)
