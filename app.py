@@ -469,7 +469,7 @@ def makeWebhookResult(data):
 	variable4=str(row_number[3]) 
 	#print('speech Data',speech_data)
 	#print('Text Data',text_data)
-	if len(recom_prop)==0:
+	if not recom_prop:
 		if length==1:
 			message= {
          "attachment": {
