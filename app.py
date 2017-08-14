@@ -260,11 +260,16 @@ def recommendationalgo():
 	print ("suggestion dictionary:",suggestiondic)
 
 
-
+	shouslist=[]
 
 	if (bool(suggestiondic[s_id])):
-		for house in suggestiondic.values():	
-			sstr=house[0]
+		#for house in suggestiondic.values():	
+			#sstr=house[0]
+		for hous in suggestiondic[s_id]:
+			if city_names.lower() in hous.lower():
+				shouslist.append(hous)
+		print (shouslist)
+		sstr=shouslist[0]
 
 
 	#users who have no similar users
