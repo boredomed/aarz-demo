@@ -129,13 +129,14 @@ def recommendationalgo(**user_info):
 	cityy=''
 	fcnt=0
 	
-	#row_title=['1500 Square Feet C Type Apartment for Sale in i-11 karachi','C type apartment for sale in i-11 karachi']
 	cominglist={}
 	comingdata={}
 	buy1={}
 	
 	print ("this is user info:", user_info)
-	#d={'0db85c4d-2f65-403d-a67e-e8af469ee685': {'1 Kanal Plot For Sale In DHA Phase-8', '1 Kanal West Open Corner Brand New Bungalow Is Available For Sale', '26.64 Marla House For Rent ', '900 Square Feet Apartment for Sale in Karachi Rahat Commercial Area'}, 'ab8f9722-1925-49cd-ab28-05aad09ddc3e': {'5 Marla Residential Land for Sale in Karachi Bahria Town', '4.4 Marla Residential Land for Sale in Karachi Bahria Town'}, '40efe1a9-f019-4328-b86e-cf14c4eac4ef': {'1 Kanal Bungalow Available For Sale in AFOHS New Malir', '1 Kanal Plot For Sale In DHA Phase-8', '26.64 Marla House For Rent ', '1 Kanal West Open Corner Brand New Bungalow Is Available For Sale'}}
+	
+	#converting database data into dictionary(buy1) format to implement algo on it
+	
 	rating=10
 	ndlist={}
 	for key in user_info:
@@ -148,18 +149,8 @@ def recommendationalgo(**user_info):
 
 	print ("this is buy1:",buy1)
 
-	#buy1={'1C1':{'1450 Square Feet Apartment for Sale in karachi F-10':10,'666 Square Yard Plot for Sale in karachi F-10/2':8,'C type apartment for sale in i-11 karachi':4},
-	#'1C2':{'1 Kanal Residential Land for Sale in karachi DHA Defence':10,'15 Marla House for Sale in karachi Abshar Colony':8},
-	#'1C3':{'10.6 Marla House for Sale in karachi Double Road':10,'5 Marla House for Sale in karachi Chilten Housing Scheme':8},
-	#'1C4':{'1 Kanal House for Sale in karachi Bahria Town':10,'10 Marla House for Sale in karachi Bahria Town Phase-2':8},
-	#'1C5':{'1 Kanal Bungalow Available For Sale in AFOHS New Malir':10,'1 Kanal Plot For Sale In DHA Phase-8 karachi':8},
-	#'1C6':{'1 Kanal House For Sale In Askari-5, karachi':10,'1 Kanal House for Rent in karachi DHA Phase-5 Block K':8}}
-
-
-
-
-
-	#storage
+	
+	#storage : inserting current user query data into buy1
 
 	for val in row_title:
 		cominglist.update({val:rating})
@@ -176,8 +167,8 @@ def recommendationalgo(**user_info):
 
 
 
-
-	#taking average
+	#NORMALIZATION 
+	#taking average 
 
 	for outerkey in buy1:
 		avgmid.update(buy1[outerkey])
@@ -191,7 +182,7 @@ def recommendationalgo(**user_info):
 
 
 
-
+	#NORMALIZATION
 	#centered cosine
 
 	for outerkey in buy1:
@@ -210,7 +201,7 @@ def recommendationalgo(**user_info):
 
 
 
-	#cosine similarity
+	#cosine similarity( To find similar user)
 
 	for house in comingdata:
 		modict1.update(comingdata[house])
@@ -275,7 +266,7 @@ def recommendationalgo(**user_info):
 			sstr=shouslist[0]
 
 
-	#users who have no similar users
+	#user who have no similar users( to suggest him/her a house too ) 
 
 
 	if (not(bool(suggestiondic[s_id]))):
