@@ -58,14 +58,15 @@ def processRequest(req):
 	unit_property=processUnits(req)
 	s_id=processsession(req)
 	maximum_value=convertMaximum(maximum_valu, price_unit)
+	locI=processInnerLoc(req)
 	print(maximum_value)
 	print("this is session id:",s_id)
 	#baseurl = "https://aarz.pk/bot/index.php?city_name="+city_names+"&sector_name="+sector_names+"&minPrice="+maximum_value+"&type="+property_type+"&LatestProperties="+latest+"&UnitArea="+area_property+"&Unit="+unit_property+"&school="+school+"&airport="+airport+"&transport="+transport+"&security="+security+"&shopping_mall="+malls+"&fuel="+fuel
 	#baseurl="https://www.aarz.pk/search/bot?postedBy=searchPage&view=&city_s="+city_names+"&price_min="+maximum_value+"&price_max=0estate_agent=&purpose=Sell&property_type="+property_type
 	if maximum_value == 0:
-		baseurl="https://www.aarz.pk/search/bot?postedBy=searchPage&view=&city_s="+city_names+"&type="+property_type+"&land_area="+unit_property+"&min_r=0&max_r="+max_area
+		baseurl="https://www.aarz.pk/search/bot?postedBy=searchPage&view=&city_s="+city_names+"&loc1="+locI+"&type="+property_type+"&land_area="+unit_property+"&min_r=0&max_r="+max_area
 	else:  
-		baseurl="https://www.aarz.pk/search/bot?postedBy=searchPage&view=&city_s="+city_names+"&type="+property_type+"&price_max="+maximum_value+"&land_area="+unit_property+"&min_r=0&max_r="+max_area
+		baseurl="https://www.aarz.pk/search/bot?postedBy=searchPage&view=&city_s="+city_names+"&loc1="+locI+"&type="+property_type+"&price_max="+maximum_value+"&land_area="+unit_property+"&min_r=0&max_r="+max_area
 	#print("city:",city_names)
 	print("url is:",baseurl)
 	result = urllib.request.urlopen(baseurl).read()
@@ -347,6 +348,12 @@ def processProjectName(req):
 	parameters = result.get("parameters")
 	project_name = parameters.get("ProjectName")
 	return project_name 
+
+def processInnerLoc(req):
+	result = req.get("result")
+	parameters = result.get("parameters")
+	inner = parameters.get("inner_loc")
+	return inner
 
 #Price
 def convertMaximum(pric, unit):
