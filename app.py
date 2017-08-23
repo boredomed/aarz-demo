@@ -397,19 +397,22 @@ def makeWebhookResult(data):
 		row_number[i]=data[i]['number']
 		row_image[i]=data[i]['image']
 		row_city[i]=data[i]['city_name']
+		if locI is None or locI=="" or locI==" ":
+	           locI="not specified"
+			
 		#sql code
 		if "Unable" in row_title[0]: #if there is no data
 			break  #don't run sql commands
 		SQLCommand=("SELECT * FROM Property WHERE Property.prop_id=%d"%  (row_id[i])) #check if this property is already present in database
 		print("PROPERTY ID1")
 		print(row_id[i])
-		Values=[8]
+		Values=[9]
 		cursor.execute(SQLCommand,Values)
 		prop_check=cursor.fetchone() 
 		if prop_check==None:#if 0 rows are returned insert that property in Property table
 			print("ADDING NEW PROPERTY")
-			SQLCommand1= ("INSERT INTO property(prop_id,city,title,address,number,slug,price,image) VALUES (%d,'%s','%s','%s','%s','%s',%d,'%s')" %(row_id[i],row_city[i],row_title[i],row_location[i],row_number[i],row_slug[i],row_price[i],row_image[i]))
-			Values1=[8]
+			SQLCommand1= ("INSERT INTO property(prop_id,city,title,address,number,slug,price,image,area) VALUES (%d,'%s','%s','%s','%s','%s',%d,'%s','%s')" %(row_id[i],row_city[i],row_title[i],row_location[i],row_number[i],row_slug[i],row_price[i],row_image[i],locI
+			Values1=[9]
 			cursor.execute(SQLCommand1,Values1);
 		conn.commit()
 		speech_data_parts="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i]) + "."
