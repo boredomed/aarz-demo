@@ -411,8 +411,8 @@ def makeWebhookResult(data):
 		prop_check=cursor.fetchone() 
 		if prop_check==None:#if 0 rows are returned insert that property in Property table
 			print("ADDING NEW PROPERTY")
-			SQLCommand1= ("INSERT INTO property(prop_id,city,title,address,number,slug,price,image,area) VALUES (%d,'%s','%s','%s','%s','%s',%d,'%s','%s')" %(row_id[i],row_city[i],row_title[i],row_location[i],row_number[i],row_slug[i],row_price[i],row_image[i],locI
-			Values1=[9]
+			SQLCommand1= ("INSERT INTO property(prop_id,city,title,address,number,slug,price,image,area) VALUES (%d,'%s','%s','%s','%s','%s',%d,'%s','%s')" %(row_id[i],row_city[i],row_title[i],row_location[i],row_number[i],row_slug[i],row_price[i],row_image[i],locI));
+			Values1=[9] 
 			cursor.execute(SQLCommand1,Values1);
 		conn.commit()
 		speech_data_parts="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+locI+","+row_city[i] + " price is "+ str(row_price[i]) + "."
