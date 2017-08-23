@@ -59,7 +59,7 @@ def processRequest(req):
 	unit_property=processUnits(req)
 	s_id=processsession(req)
 	maximum_value=convertMaximum(maximum_valu, price_unit)
-	locI=processInnerLoc(req)
+	global locI=processInnerLoc(req)
 	print("LOCI: ",locI)
 	print(maximum_value)
 	print("this is session id:",s_id)
