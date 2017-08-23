@@ -51,6 +51,7 @@ def processRequest(req):
 	global str
 	global r_slug
 	global im_url
+	global locI
 	intent_name=processIntentName(req)
 	city_names=processlocation(req)
 	property_type=processPropertyType(req)
@@ -378,6 +379,7 @@ def makeWebhookResult(data):
 	print("2locI: ",locI)
 	i=0
 	global row_title
+	global locI
 	length=len(data)
 	speech_data = "Here are some properties with your choice. We have total of "+str(length)+" records of your interest in city  "+city+"."
 	text_data = "Here are some properties with your choice. We have total of "+str(length)+" records of your interest in city  "+city+"."
