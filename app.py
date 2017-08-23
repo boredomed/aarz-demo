@@ -398,7 +398,7 @@ def makeWebhookResult(data):
 		row_image[i]=data[i]['image']
 		row_city[i]=data[i]['city_name']
 		if locI is None or locI=="" or locI==" ":
-	           locI="not specified"
+	           locI="0"
 			
 		#sql code
 		if "Unable" in row_title[0]: #if there is no data
@@ -415,14 +415,14 @@ def makeWebhookResult(data):
 			Values1=[9]
 			cursor.execute(SQLCommand1,Values1);
 		conn.commit()
-		speech_data_parts="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i]) + "."
+		speech_data_parts="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+locI+","+row_city[i] + " price is "+ str(row_price[i]) + "."
 		speech_data = speech_data + speech_data_parts
-		text_data_parts ="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+row_city[i] + " price is "+ str(row_price[i])+ ". For Info about this contact at number "+str(row_number[i]) + "."
+		text_data_parts ="Here is record " + str(i+1) +":"+ row_title[i]+" in city "+locI+","+row_city[i] + " price is "+ str(row_price[i])+ ". For Info about this contact at number "+str(row_number[i]) + "."
 		text_data = text_data + text_data_parts	
 		i+=1
 	print("CITY IS")	
 	print(row_city[0])
-	SQLCommand3 = ("SELECT u.sess_id,p.title FROM users u join property p on u.prop_id=p.prop_id WHERE p.city='%s' ORDER BY u.sess_id"%(city_names)) #select the all properties of this city searched by users
+	SQLCommand3 = ("SELECT u.sess_id,p.title FROM users u join property p on u.prop_id=p.prop_id WHERE p.city='%s'and p.area='%s' ORDER BY u.sess_id"%(city_names,locI)) #select the all properties of this city searched by users
 	Values3=[2]
 	cursor.execute(SQLCommand3,Values3);
 	userdata=cursor.fetchone()
