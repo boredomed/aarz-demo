@@ -23,6 +23,7 @@ conn = psycopg2.connect(
 )
 users_info={}
 global locI
+jonsnow=1234
 #user_info.update({'a':{0,1}})
 cursor=conn.cursor()
 # Flask app should start in global layout
@@ -374,6 +375,7 @@ def convertMaximum(pric, unit):
 	return str(price)
 
 def makeWebhookResult(data):
+	print("jonsnow: ",jonsnow)
 	i=0
 	global row_title
 	length=len(data)
