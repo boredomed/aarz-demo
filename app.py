@@ -60,6 +60,7 @@ def processRequest(req):
 	s_id=processsession(req)
 	maximum_value=convertMaximum(maximum_valu, price_unit)
 	locI=processInnerLoc(req)
+	print("LOCI: ",locI)
 	print(maximum_value)
 	print("this is session id:",s_id)
 	#baseurl = "https://aarz.pk/bot/index.php?city_name="+city_names+"&sector_name="+sector_names+"&minPrice="+maximum_value+"&type="+property_type+"&LatestProperties="+latest+"&UnitArea="+area_property+"&Unit="+unit_property+"&school="+school+"&airport="+airport+"&transport="+transport+"&security="+security+"&shopping_mall="+malls+"&fuel="+fuel
