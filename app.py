@@ -22,6 +22,7 @@ conn = psycopg2.connect(
     port=db_url.port
 )
 users_info={}
+global locI
 #user_info.update({'a':{0,1}})
 cursor=conn.cursor()
 # Flask app should start in global layout
@@ -49,7 +50,6 @@ def processRequest(req):
 	global str
 	global r_slug
 	global im_url
-	global locI
 	intent_name=processIntentName(req)
 	city_names=processlocation(req)
 	property_type=processPropertyType(req)
@@ -59,7 +59,7 @@ def processRequest(req):
 	unit_property=processUnits(req)
 	s_id=processsession(req)
 	maximum_value=convertMaximum(maximum_valu, price_unit)
-	global locI=processInnerLoc(req)
+	locI=processInnerLoc(req)
 	print("LOCI: ",locI)
 	print(maximum_value)
 	print("this is session id:",s_id)
