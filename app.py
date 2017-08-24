@@ -377,6 +377,7 @@ def convertMaximum(pric, unit):
 
 def makeWebhookResult(data):
 	global locI
+	areasub=""
 	print("2locI: ",locI)
 	i=0
 	global row_title
@@ -405,8 +406,13 @@ def makeWebhookResult(data):
 		row_city[i]=data[i]['city_name']
 		if locI is None or locI=="" or locI==" ":
 	           locI="0"
-			
+		SQLCommand0=("SELECT * FROM location where city='%s' and area='%s'"%(city_names,locI))	
 		#sql code
+		Values0=[2]
+		cursor.execute(SQLCommand0,Values0)
+		innerloc_check=cursor.fetchone()
+		if innerloc_check==None:
+			areasub="There is no such area in "+city_names+". Here are some general properties in "+city_names+"."
 		if "Unable" in row_title[0]: #if there is no data
 			break  #don't run sql commands
 		SQLCommand=("SELECT * FROM Property WHERE Property.prop_id=%d"%  (row_id[i])) #check if this property is already present in database
@@ -482,6 +488,7 @@ def makeWebhookResult(data):
 	if not recom_prop:
 		if length==1:
 			message= {
+				"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
@@ -526,6 +533,7 @@ def makeWebhookResult(data):
     }
 		else:
 			message= {
+				"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
@@ -587,6 +595,7 @@ def makeWebhookResult(data):
 			}	
 	elif "Unable" in row_title[0]:
 		message={
+			"text":areasub,
 	  "attachment":{
 	   "type":"template",
 	      "payload":{
@@ -614,6 +623,7 @@ def makeWebhookResult(data):
   }
 	elif length==1:
 		message= {
+			"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
@@ -658,6 +668,7 @@ def makeWebhookResult(data):
     }
 	else:
 		message= {
+			"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
