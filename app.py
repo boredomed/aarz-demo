@@ -488,7 +488,7 @@ def makeWebhookResult(data):
 	if not recom_prop:
 		if length==1:
 			message= {
-				"text":areasub,
+				#"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
@@ -533,7 +533,7 @@ def makeWebhookResult(data):
     }
 		else:
 			message= {
-				"text":areasub,
+				#"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
@@ -595,7 +595,7 @@ def makeWebhookResult(data):
 			}	
 	elif "Unable" in row_title[0]:
 		message={
-			"text":areasub,
+			#"text":areasub,
 	  "attachment":{
 	   "type":"template",
 	      "payload":{
@@ -623,7 +623,7 @@ def makeWebhookResult(data):
   }
 	elif length==1:
 		message= {
-			"text":areasub,
+			#"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
@@ -668,7 +668,7 @@ def makeWebhookResult(data):
     }
 	else:
 		message= {
-			"text":areasub,
+			#"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
