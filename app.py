@@ -425,7 +425,7 @@ def makeWebhookResult(data):
 		cursor.execute(SQLCommand0,Values0)
 		innerloc_check=cursor.fetchone()
 		if innerloc_check==None:
-			areasub="\nThere is no such area in "+city_names+". You can have a look at these."
+			areasub="\nThere is no such area in "+city_names+". You can have a look at this."
 			print("areasub :",areasub)
 		if "Unable" in row_title[0]: #if there is no data
 			break  #don't run sql commands
