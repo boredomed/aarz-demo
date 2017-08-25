@@ -390,7 +390,7 @@ def convertMaximum(pric, unit):
 
 def makeWebhookResult(data):
 	global locI
-	areasub=""
+	areasub=" "
 	print("2locI: ",locI)
 	i=0
 	global row_title
@@ -501,7 +501,7 @@ def makeWebhookResult(data):
 	if not recom_prop:
 		if length==1:
 			message= {
-				#"text":areasub,
+				"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
@@ -509,6 +509,7 @@ def makeWebhookResult(data):
                "elements": [{
                "title": row_title[0],
                 "subtitle":row_location[0],
+		       #"subtitle":areasub,
               "subtitle":"Price: Rs."+str(row_price[0]),
                 "item_url": "https://www.aarz.pk/property-detail/"+row_slug[0],               
                "image_url":"https://www.aarz.pk/"+row_image[0]  ,
@@ -546,7 +547,7 @@ def makeWebhookResult(data):
     }
 		else:
 			message= {
-				#"text":areasub,
+				"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
@@ -608,7 +609,7 @@ def makeWebhookResult(data):
 			}	
 	elif "Unable" in row_title[0]:
 		message={
-			#"text":areasub,
+			"text":areasub,
 	  "attachment":{
 	   "type":"template",
 	      "payload":{
@@ -636,7 +637,7 @@ def makeWebhookResult(data):
   }
 	elif length==1:
 		message= {
-			#"text":areasub,
+			"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
@@ -681,7 +682,7 @@ def makeWebhookResult(data):
     }
 	else:
 		message= {
-			#"text":areasub,
+			"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
