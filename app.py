@@ -454,30 +454,35 @@ def makeWebhookResult(data):
 	userdata=cursor.fetchone()
 	users_info={}
 	if userdata!=None:
-		print("USER DATA DICTIONARY")
-		print(userdata)
-		print("USER DATA END")
-		while userdata:#to cater all the rows from the result
-			if userdata[0] in users_info: #if that user is already in the dictionary, append to the houses list
-				users_info[userdata[0]].update({userdata[1]})
-			else: #if this user is not in the dictionary, add the data
-				users_info.update({userdata[0]: {userdata[1]}})
-			userdata=cursor.fetchone()
-		print("USER INFO DICTIONARY")
-		print(users_info)
-		print("USER INFO END")
-		print(row_title[0])
-		algostr=recommendationalgo(**users_info)
-		algos = "Recommeded for you: " + algostr
-		#recommended property
-		print(algos)
-		SQLCommand4=("SELECT * FROM Property WHERE title='%s'"%(algostr))
-		Values4=[8]
-		cursor.execute(SQLCommand4,Values4);
-		recom_prop=cursor.fetchone()
-		print("recom_prop")
-		print(recom_prop)
-		text_data = text_data + algos
+		SQLCommand3 = ("SELECT u.sess_id,p.title FROM users u join property p on u.prop_id=p.prop_id WHERE p.city='%s' ORDER BY u.sess_id"%(city_names,locI)) #select the all properties of this city searched by users
+		Values3=[2]
+		cursor.execute(SQLCommand3,Values3);
+		userdata=cursor.fetchone()
+		if userdata!=None:
+			print("USER DATA DICTIONARY")
+			print(userdata)
+			print("USER DATA END")
+			while userdata:#to cater all the rows from the result
+				if userdata[0] in users_info: #if that user is already in the dictionary, append to the houses list
+					users_info[userdata[0]].update({userdata[1]})
+				else: #if this user is not in the dictionary, add the data
+					users_info.update({userdata[0]: {userdata[1]}})
+				userdata=cursor.fetchone()
+			print("USER INFO DICTIONARY")
+			print(users_info)
+			print("USER INFO END")
+			print(row_title[0])
+			algostr=recommendationalgo(**users_info)
+			algos = "Recommeded for you: " + algostr
+			#recommended property
+			print(algos)
+			SQLCommand4=("SELECT * FROM Property WHERE title='%s'"%(algostr))
+			Values4=[8]
+			cursor.execute(SQLCommand4,Values4);
+			recom_prop=cursor.fetchone()
+			print("recom_prop")
+			print(recom_prop)
+			text_data = text_data + algos
 	j=0;
 	while (j<length):
 		if "Unable" in row_title[0]:
