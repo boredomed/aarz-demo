@@ -390,7 +390,7 @@ def convertMaximum(pric, unit):
 
 def makeWebhookResult(data):
 	global locI
-	areasub=" "
+	areasub="-- "
 	print("2locI: ",locI)
 	i=0
 	global row_title
@@ -426,6 +426,7 @@ def makeWebhookResult(data):
 		innerloc_check=cursor.fetchone()
 		if innerloc_check==None:
 			areasub="There is no such area in "+city_names+". Here are some general properties in "+city_names+"."
+			print("areasub :",areasub)
 		if "Unable" in row_title[0]: #if there is no data
 			break  #don't run sql commands
 		SQLCommand=("SELECT * FROM Property WHERE Property.prop_id=%d"%  (row_id[i])) #check if this property is already present in database
@@ -547,7 +548,7 @@ def makeWebhookResult(data):
     }
 		else:
 			message= {
-				"text":areasub,
+				#"text":areasub,
          "attachment": {
            "type": "template",
             "payload": {
