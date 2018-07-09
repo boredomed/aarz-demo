@@ -70,14 +70,14 @@ def processRequest(req):
 	#baseurl="https://www.aarz.pk/search/bot?postedBy=searchPage&view=&city_s="+city_names+"&price_min="+maximum_value+"&price_max=0estate_agent=&purpose=Sell&property_type="+property_type
 	if maximum_value == 0:
 		if buy_rent == 'a':
-			baseurl="https://www.aarz.pk/search/bot?postedBy=searchPage&view=&city_s="+city_names+"&loc1="+locI+"&type="+property_type+"&land_area="+unit_property+"&min_r=0&max_r="+max_area
+			baseurl="https://www.aarz.pk/search?postedBy=searchPage&view=&city_s="+city_names+"&loc1="+locI+"&type="+property_type+"&land_area="+unit_property+"&min_r=0&max_r="+max_area
 		else:
-			baseurl="https://www.aarz.pk/search/bot?postedBy=searchPage&view=&city_s="+city_names+"&loc1="+locI+"&type="+property_type+"&land_area="+unit_property+"&min_r=0&max_r="+max_area+"&purpose="+buy_rent
+			baseurl="https://www.aarz.pk/search?postedBy=searchPage&view=&city_s="+city_names+"&loc1="+locI+"&type="+property_type+"&land_area="+unit_property+"&min_r=0&max_r="+max_area+"&purpose="+buy_rent
 	else:
 		if buy_rent == 'a':
-			baseurl="https://www.aarz.pk/search/bot?postedBy=searchPage&view=&city_s="+city_names+"&loc1="+locI+"&type="+property_type+"&price_max="+maximum_value+"&land_area="+unit_property+"&min_r=0&max_r="+max_area
+			baseurl="https://www.aarz.pk/search?postedBy=searchPage&view=&city_s="+city_names+"&loc1="+locI+"&type="+property_type+"&price_max="+maximum_value+"&land_area="+unit_property+"&min_r=0&max_r="+max_area
 		else:
-			baseurl="https://www.aarz.pk/search/bot?postedBy=searchPage&view=&city_s="+city_names+"&loc1="+locI+"&type="+property_type+"&land_area="+unit_property+"&min_r=0&max_r="+max_area+"&purpose="+buy_rent
+			baseurl="https://www.aarz.pk/search?postedBy=searchPage&view=&city_s="+city_names+"&loc1="+locI+"&type="+property_type+"&land_area="+unit_property+"&min_r=0&max_r="+max_area+"&purpose="+buy_rent
 	#print("city:",city_names)
 	print("url is:",baseurl)
 	result = urllib.request.urlopen(baseurl).read()
